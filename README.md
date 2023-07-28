@@ -10,3 +10,4 @@
 8. Sucess creating and deleting reactions to thoughts and add/remove friends to a user's friend list
 
 ## Walk-through
+https://drive.google.com/file/d/1-OKu5jd2iveKdh_F_Gxrrv5B-7XCfkMG/view
