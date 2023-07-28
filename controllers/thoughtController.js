@@ -12,7 +12,7 @@ module.exports = {
         .then((thought) =>
         !thought ? res.status(404).json ({message: "No thought found with this id!"})
         : res.json(thought))
-        .catch(res.status(400).json (err));
+        .catch(err => res.status(400).json(err));
     },
     createThought(req, res) {
         Thought.create(req.body)

@@ -1,11 +1,16 @@
-const { connect, connection } = require('mongoose');
+const express = require('express');
+const db = require('./config/connection');
+const routes = require('./routes');
 
-const connectionString = 
-process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/SocialNetworkDB';
+const PORT = process.env.PORT || 3001;
+const app = express();
 
-connect(connectionString, {
-    useNewUrlParser: true,
-    useUnifiedTopolgy: true,
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(routes);
+
+db.once("open", () => {
+    app.listen(PORT, () => {
+        console.log(`API server running on port ${PORT}!`);
+    });
 });
-
-module.exports = connection;

@@ -7,7 +7,7 @@ module.exports = {
         .catch((err) => res.status(400).json(err));
     },
     getSingleUser(req, res) {
-        User.findOne({_id: req.params,userId})
+        User.findOne({_id: req.params.userId})
         .populate("thoughts")
         .populate('friends')
         .select("-__v")
@@ -47,7 +47,7 @@ module.exports = {
         .then((user) =>
         !user
         ? res.status(404).json({ message:"No user found with this id!"})
-        : Thought.deleteMnay({ _id: { $in: user.thoughts }})
+        : Thought.deleteMany({ _id: { $in: user.thoughts }})
         )
         .then(() => res.json({ message: "User and user thoughts deleted!"}))
         .catch((err) => res.status(400).json(err));
@@ -55,7 +55,7 @@ module.exports = {
     addFriend(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId},
-            { $addToSet: { friends: req.paramts.friendId}},
+            { $addToSet: { friends: req.params.friendId}},
             { runValidators: true, new: true}
         )
         .then((user) =>
